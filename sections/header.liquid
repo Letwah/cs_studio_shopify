@@ -1,3 +1,7 @@
+<!-- CREATE MENU VARIABLE conditionally rendering based on the JSON data -->
+{% assign main_menu_linklist = linklists[section.settings.menu].links %}
+<!-- END VARIABLE -->
+
 <div class="relative bg-white" x-data="{ mobileMenuOpen: true }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
@@ -21,7 +25,7 @@
 
 
       <nav x-data="{ open: false }" class="hidden md:flex space-x-10">
-        {% for link in linklists.main-menu.links %}
+        {% for link in main_menu_linklist %}
           {% if link.links != blank %}
             <div class="relative">
               <button
@@ -91,7 +95,7 @@
         <!-- MOBILE MENU HEADER TITLE PLUS CLOSE BUTTON -->
         <div class="flex items-center justify-between pb-3">
           <div>
-            <h1 class="text-lg text-gray-500">{{ shop.name }}</h1>
+            <h1 class="text-lg text-gray-500">{{ section.settings.mobile_menu_title }}</h1>
           </div>
           <div class="-mr-2">
             <button
@@ -106,7 +110,8 @@
         <!-- NAVIGATION LINKS FOR MOBILE MENU -->
         <div class="pt-3" x-data="{ open: null }">
           <nav class="grid gap-y-7">
-            {% for link in linklists.main-menu.links %}
+
+            {% for link in main_menu_linklist %}
               {% assign link_handle = link.handle | replace: '_', '_' %}
               <div class="relative">
                 {% if link.links != blank %}
@@ -138,3 +143,27 @@
     </div>
   </div>
 </div>
+
+
+<!-- ****** ONLY ONE SCHEMA TAG PER SECTION (must be populated with JSON) **** -->
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "mobile_menu_title",
+        "label": "Title",
+        "default": "Menu",
+        "info": "This is the title of the mobile menu screen"
+      }, {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Header Menu",
+        "default": "main-menu",
+        "info": "This is the menu of links"
+      }
+    ]
+  }
+{% endschema %}
