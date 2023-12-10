@@ -1,5 +1,6 @@
 <!-- CREATE MENU VARIABLE conditionally rendering based on the JSON data -->
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
+{{ shop.customer_accounts_enabled }}
 <!-- END VARIABLE -->
 
 <div class="relative bg-white" x-data="{ mobileMenuOpen: true }">
