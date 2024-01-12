@@ -3,13 +3,13 @@
     "template": {
       "type": "template-article",
       "blocks": {
-        "thumbnail": {
-          "type": "featured_image",
+        "published_date": {
+          "type": "article_published_date",
           "settings": {
           }
         },
-        "published_date": {
-          "type": "article_published_date",
+        "thumbnail": {
+          "type": "featured_image",
           "settings": {
           }
         },
@@ -30,8 +30,8 @@
         }
       },
       "block_order": [
-        "thumbnail",
         "published_date",
+        "thumbnail",
         "author",
         "title",
         "content"
